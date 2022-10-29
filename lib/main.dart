@@ -30,8 +30,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-v  TextEditingController controller = TextEditingController();
+  TextEditingController controller = TextEditingController();
   var val = true;
+  final _valueList = ['첫 번째', '두 번째', '세 번째'];
+  var _selectedValue = '첫 번째';
 
   @override
   Widget build(BuildContext context) {
@@ -47,25 +49,25 @@ v  TextEditingController controller = TextEditingController();
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Column(
-        children: [
-          Checkbox(
-              value: val,
-              onChanged: (value) {
-                setState(() {
-                  val = value!;
-                });
-              }),
-          Switch(
-              value: val,
-              onChanged: (value) {
-                setState(() {
-                  val = value!;
-                });
-              })
-        ],
-      ),
-      // This trailing comma makes auto-formatting nicer for build methods.
+      body: Center(
+        child: DropdownButton(
+          value : _selectedValue,
+          items : _valueList.map(
+              (value) {
+                return DropdownMenuItem(
+                  value: value,
+                    child: Text(value),
+                );
+              },
+          ).toList(),
+          onChanged: (value) {
+            setState(() {
+              _selectedValue = value!;
+            });
+          },
+        ),
+      )
+
     );
   }
 }
