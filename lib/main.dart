@@ -35,37 +35,35 @@ class _MyHomePageState extends State<MyHomePage> {
   final _valueList = ['첫 번째', '두 번째', '세 번째'];
   var _selectedValue = '첫 번째';
 
+  _openPopup() {
+    showDialog(
+      context: context,
+      builder : (BuildContext context) {
+        return AlertDialog(
+          title: Text("알림창 타이틀"),
+          content: Text("알림창에 들어가는 내용입니다."),
+          actions : [
+            TextButton(
+              child: Text('닫기'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      }
+    );
+  }
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        child: DropdownButton(
-          value : _selectedValue,
-          items : _valueList.map(
-              (value) {
-                return DropdownMenuItem(
-                  value: value,
-                    child: Text(value),
-                );
-              },
-          ).toList(),
-          onChanged: (value) {
-            setState(() {
-              _selectedValue = value!;
-            });
-          },
-        ),
+      body: TextButton(
+        child: Text('팝업 띄우기'),
+        onPressed: _openPopup,
       )
 
     );
