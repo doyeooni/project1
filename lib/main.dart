@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: '앱바 글자 바꾸기'),
+      home: const MyHomePage(title: '첫번째 플루터 프로젝트'),
     );
   }
 }
@@ -30,30 +30,49 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 0;
 
-  List<Widget> _widgets = [
-    Text('Home', style: TextStyle(color: Colors.red)),
-    Placeholder (),
-    Placeholder(),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    // This method is rerun every time setState is called, for instance as done
+    // by the _incrementCounter method above.
+    //
+    // The Flutter framework has been optimized to make rerunning build methods
+    // fast, so that you can just rebuild anything that needs updating rather
+    // than having to individually change instances of widgets.
     return Scaffold(
-        appBar: AppBar(
-            title: Text("첫번째 플루터 프로젝트"),
-        ),
-        body: Center(
-          child: Image.asset("flutter_logo.png",
-          width: 300,)
-        )
+      appBar: AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: Text(widget.title),
+      ),
+      body: Column(
+        children: [
+          Container(
+            width: 100,
+            child: TextField(
+              decoration: InputDecoration(
+                  hintText: "아이디를 입력해주세요",
+                  labelText: "아이디",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0)
+                  )
+              ),
+              controller: controller,
+              onChanged: (text) {
+                print(text);
+              }, ),
+          ),
+          TextButton(
+            child: Text('회원가입'),
+            onPressed: () {
+              print(controller.text);
+            },
+          )
+        ],
+      ),
+      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
