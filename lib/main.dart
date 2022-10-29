@@ -30,8 +30,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-  TextEditingController controller = TextEditingController();
+v  TextEditingController controller = TextEditingController();
+  var val = true;
 
   @override
   Widget build(BuildContext context) {
@@ -49,27 +49,20 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         children: [
-          Container(
-            width: 100,
-            child: TextField(
-              decoration: InputDecoration(
-                  hintText: "아이디를 입력해주세요",
-                  labelText: "아이디",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0)
-                  )
-              ),
-              controller: controller,
-              onChanged: (text) {
-                print(text);
-              }, ),
-          ),
-          TextButton(
-            child: Text('회원가입'),
-            onPressed: () {
-              print(controller.text);
-            },
-          )
+          Checkbox(
+              value: val,
+              onChanged: (value) {
+                setState(() {
+                  val = value!;
+                });
+              }),
+          Switch(
+              value: val,
+              onChanged: (value) {
+                setState(() {
+                  val = value!;
+                });
+              })
         ],
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
